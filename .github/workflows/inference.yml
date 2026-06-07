@@ -1,0 +1,35 @@
+# .github/workflows/inference.yml
+# Inference workflow.
+# Purpose: let anyone run a prediction on demand from the GitHub UI.
+# Trigger: workflow_dispatch = a manual "Run workflow" button with an input box.
+
+name: Inference
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_url:
+        description: 'URL of the image to classify'
+        required: true
+        default: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg'
+
+jobs:
+  infer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run inference
+        env:
+          # Secrets are configured in repo Settings -> Secrets and variables -> Actions.
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          # The image URL typed into the "Run workflow" box is passed through here.
+          IMAGE_URL: ${{ github.event.inputs.image_url }}
+        run: python src/inference.py

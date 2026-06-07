@@ -1,0 +1,34 @@
+# .github/workflows/ci.yml
+# CI (Continuous Integration) workflow.
+# Purpose: lint the Python code every time someone pushes to develop or opens a
+# pull request into main. This is NOT training - it just checks code quality.
+
+name: CI
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      # Pull the repository code into the runner.
+      - uses: actions/checkout@v4
+
+      # Install Python 3.11.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Install flake8 (we install requirements too so flake8 can resolve imports
+      # if you later add import-time checks; keep it light to stay fast).
+      - name: Install linter
+        run: pip install flake8
+
+      # Fail the build on real errors; warn on style. max-line-length matches
+      # the assignment's example so our code passes cleanly.
+      - name: Run flake8
+        run: flake8 src/ --max-line-length=120 --extend-ignore=E402
