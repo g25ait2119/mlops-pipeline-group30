@@ -53,7 +53,7 @@ def split_data(in_img, out_img, limit):
         base = os.path.basename(im)
        # fname = os.path.splitext(base)[0]
 
-        # print(count, fname)
+        print(count, fname)
 
         shutil.copy(in_img+'/'+im, out_img)
 
