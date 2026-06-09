@@ -13,7 +13,6 @@ valdir = './Dataaset/Validation/'+s
 testdir = './Dataaset/Test/'+s
 
 
-
 traind_o = './train/'+s.lower()
 valdir_o = './val/'+s.lower()
 testdir_o = './test/'+s.lower()
@@ -35,15 +34,14 @@ print()
 # split data
 
 def split_data(in_img, out_img, limit):
-
     """
     in_img: input image directory
     in_lb,: input label directory
     out_img: output image directory
     out_lb: output label directory
-    
+
     """
-    
+
     images1 = os.listdir(in_img)[:limit]
     random.shuffle(images1)
 
@@ -53,15 +51,13 @@ def split_data(in_img, out_img, limit):
     for im in tqdm(images1, colour='blue'):
         # print(im)
         base = os.path.basename(im)
-        fname = os.path.splitext(base)[0]
+       # fname = os.path.splitext(base)[0]
 
         # print(count, fname)
 
-        
         shutil.copy(in_img+'/'+im, out_img)
 
-
-        count+=1
+        count += 1
 
     print('Done!')
 
@@ -75,7 +71,3 @@ print('Valdation data-set created')
 
 split_data(testdir, testdir_o, int(lmt*0.1))
 print('Test data-set created')
-
-
-
-
