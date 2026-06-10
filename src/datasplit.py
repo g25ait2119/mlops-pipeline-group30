@@ -50,13 +50,12 @@ def split_data(in_img, out_img, limit):
     count = 1
     for im in tqdm(images1, colour='blue'):
         # print(im)
-        base = os.path.basename(im)
-       # fname = os.path.splitext(base)[0]
+        # base = os.path.basename(im)
+        # fname = os.path.splitext(base)[0]
 
-        print(count, fname)
+        # print(count, fname)
 
         shutil.copy(in_img+'/'+im, out_img)
-
         count += 1
 
     print('Done!')
