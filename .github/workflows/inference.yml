@@ -11,7 +11,7 @@ on:
       image_url:
         description: 'URL of the image to classify'
         required: true
-        default: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg'
+        default: 'https://images.unsplash.com/photo-1517841905240-472988babdf9'
 
 jobs:
   infer:
