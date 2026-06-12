@@ -14,7 +14,7 @@ MODEL_ID = os.getenv("HF_MODEL_NAME", "computervisionpro/convnextv2-real-fake")
 def load_image(image_source: str) -> Image.Image:
     if image_source.startswith(("http://", "https://")):
         headers = {"User-Agent": "Mozilla/5.0 (compatible; MLOpsBot/1.0)"}
-        response = requests.get(image_source, timeout=30)
+        response = requests.get(image_source, timeout=30, headers=headers)
         response.raise_for_status()
         return Image.open(BytesIO(response.content)).convert("RGB")
     return Image.open(image_source).convert("RGB")
