@@ -2,8 +2,8 @@
 
 IIT Jodhpur · PGD AI · MLOps Group Assignment
 
-Fine-tunes a compact image-classification model (TBD) on a
-small public image dataset (TBD), tracks experiments on Weights & Biases, stores
+Fine-tunes a compact image-classification model  on a
+small public image dataset, tracks experiments on Weights & Biases, stores
 the model on the Hugging Face Hub, containerises inference with Docker, and
 automates linting + inference with GitHub Actions.
 
@@ -19,19 +19,14 @@ automates linting + inference with GitHub Actions.
 ```
 .
 ├── src/
-│   ├── config.py            # all constants (model, dataset, labels, paths)
-│   ├── data_preparation.py  # Task 2: inspect + clean images + id2label.json
-│   ├── train.py             # Task 4: fine-tune + W&B logging
-│   ├── evaluate.py          # test-set metrics
-│   ├── inference.py         # Task 6/7: classify a single image
-│   ├── metrics.py           # accuracy + weighted F1
-│   └── utils.py             # seeding, secrets, device
+│   ├── datasplit.py                
+│   ├── inference.py                # classify a single image
 ├── .github/workflows/
-│   ├── ci.yml               # Task 7.1: flake8 on push to develop
-│   └── inference.yml        # Task 7.2: manual inference run (image URL input)
+│   ├── ci.yml                      # flake8 on push to develop
+│   └── inference.yml               # manual inference run (image URL input)
 ├── notebooks/
-│   └── kaggle_train.py      # Task 4: copy/paste cells for Kaggle
-├── Dockerfile               # Task 6
+│   └── group30-mlops-a3.ipynb      # copy/paste cells for Kaggle
+├── Dockerfile                      
 ├── requirements.txt
 ├── id2label.json
 ├── LICENSE
@@ -53,12 +48,6 @@ pip install -r requirements.txt
 
 ## How to run each script (filled in by owners)
 ```bash
-# Task 2 — prepare data + write id2label.json
-python src/data_preparation.py
-
-# Task 4 — train (set WANDB_API_KEY / HF_TOKEN in env first)
-python src/train.py --version v1 ...
-python src/train.py --version v2 ...
 
 # Inference (image URL or local path)
 IMAGE_URL="https://example.com/cat.jpg" python src/inference.py
@@ -72,8 +61,9 @@ docker run --rm -e IMAGE_URL="https://example.com/cat.jpg" mlops-pipeline-group3
 
 ## Public links (fill in before submission)
 - GitHub repo: `https://github.com/g25ait2119/mlops-pipeline-group30`
-- Kaggle notebook v1: `<link>`
-- Kaggle notebook v2: `<link>`
-- Hugging Face model: `https://huggingface.co/<user>/<model>`
-- Docker image: `https://hub.docker.com/r/<user>/mlops-pipeline-group30`
-- W&B project: `https://wandb.ai/<entity>/mlops-pipeline-group30`
+- Kaggle notebook: `https://www.kaggle.com/code/computervisionpro/group30-mlops-a3`
+- Kaggle Dataset: `https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images`
+- Hugging Face model(Base Model): `https://huggingface.co/facebook/convnextv2-tiny-1k-224`
+- Hugging Face model(Hugging Face): `https://huggingface.co/computervisionpro/convnextv2-real-fake`
+- Docker image: `https://hub.docker.com/r/sureshbabugandla1/mlops-group30-inference`
+- W&B project: `https://wandb.ai/computervisionpro-na/mlops-assignment3`
